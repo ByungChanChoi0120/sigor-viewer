@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryBadge from '../../components/CategoryBadge.astro';
+import AuthorTag from '../../components/AuthorTag.astro';
+import PrevNext from '../../components/PrevNext.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog'))
+    .filter((p) => !p.data.draft)
+    .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
+}
+
+const { post, posts } = Astro.props;
+const { Content } = await render(post);
+const index = posts.findIndex((p) => p.id === post.id);
+const next = index > 0 ? posts[index - 1] : null;
+const prev = index < posts.length - 1 ? posts[index + 1] : null;
+const author = post.data.category === 'jeodanggeun' ? 'jeodanggeun' : 'noonoji';
+---
+<BaseLayout title={post.data.title}>
+  <a href="/all" class="muted">← 전체 글로</a>
+
+  <section class="card" style="margin-top:10px;">
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <CategoryBadge category={post.data.category} />
+      <span class="muted">{post.data.date}</span>
+    </div>
+    <h1 style="margin:10px 0 0;">{post.data.title}</h1>
+    {post.data.summary && <p class="muted" style="margin:8px 0 0;">{post.data.summary}</p>}
+    <div style="margin-top:12px;">
+      <AuthorTag author={author} />
+    </div>
+  </section>
+
+  <article class="card prose" style="background:#fff;">
+    <Content />
+  </article>
+
+  <PrevNext prev={prev} next={next} />
+</BaseLayout>

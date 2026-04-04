@@ -1,0 +1,107 @@
+---
+const { title = '시고르의 잡종서재' } = Astro.props;
+---
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <style>
+      :root{
+        --fg:#1a1a2e;
+        --muted:#71717a;
+        --border:#e4e4e7;
+        --card:#ffffff;
+        --brand:#f97316;
+        --bg:#fffbf5;
+      }
+      *{box-sizing:border-box;margin:0}
+      body{
+        color:var(--fg);
+        background:var(--bg);
+        line-height:1.8;
+        font-family:'Apple SD Gothic Neo','Noto Sans KR',-apple-system,BlinkMacSystemFont,sans-serif;
+      }
+      a{color:var(--brand);text-decoration:none}
+      a:hover{text-decoration:underline}
+      .muted{color:var(--muted);font-size:14px}
+      .wrap{max-width:720px;margin:0 auto;padding:24px 16px 48px}
+      .header{
+        padding:20px 0 16px;
+        border-bottom:2px solid var(--brand);
+        margin-bottom:24px;
+      }
+      .header-top{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+      .avatar{width:48px;height:48px;border-radius:50%;background:#fff3e0;display:flex;align-items:center;justify-content:center;font-size:28px}
+      .site-name{font-size:24px;font-weight:800;letter-spacing:-.02em}
+      .site-desc{margin:0}
+      .nav{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+      .nav a{
+        padding:6px 12px;
+        border-radius:8px;
+        font-size:14px;
+        font-weight:600;
+        color:var(--fg);
+        background:#fff3e0;
+      }
+      .nav a:hover{background:#ffe0b2;text-decoration:none}
+      .card{
+        border:1px solid var(--border);
+        border-radius:12px;
+        padding:14px;
+        background:var(--card);
+        margin:10px 0;
+      }
+      .post-grid{display:flex;flex-direction:column;gap:10px}
+      h1{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.3;margin:8px 0 12px}
+      h2{font-size:22px;font-weight:700;margin:20px 0 10px;line-height:1.3}
+      h3{font-size:18px;font-weight:700;line-height:1.3}
+      .prose{font-size:17px}
+      .prose p{margin:0 0 14px}
+      .prose h2{margin:28px 0 10px}
+      .prose h3{margin:22px 0 8px}
+      .prose ul,.prose ol{margin:8px 0 16px 20px}
+      .prose img{width:100%;height:auto;border-radius:10px;border:1px solid var(--border);margin:8px 0}
+      .prose blockquote{border-left:3px solid var(--brand);padding-left:14px;margin:12px 0;color:var(--muted)}
+      .site-footer{margin-top:36px;padding-top:18px;border-top:2px solid var(--brand);text-align:center}
+      .ft-chars{font-size:16px;font-weight:700}
+      .ft-sep{color:#d4d4d8;margin:0 4px}
+      .ft-desc{font-size:13px;color:var(--muted);margin-top:6px}
+      .ft-copy{font-size:12px;color:#a1a1aa;margin-top:8px}
+      @media (max-width:600px){
+        .site-name{font-size:20px}
+        h1{font-size:26px}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <div class="header-top">
+          <div class="avatar">🐕</div>
+          <div>
+            <a href="/"><span class="site-name">시고르의 잡종서재</span></a>
+            <p class="muted site-desc">썰매견 막내가 이것저것 배우고 끄적이는 공간 🐾</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="/all">전체</a>
+          <a href="/lessons">배운것</a>
+          <a href="/worklog">한것</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer class="site-footer">
+        <div class="ft-chars">
+          <span>🐕 시고르</span>
+          <span class="ft-sep">·</span>
+          <span>뽀피터스 막내</span>
+        </div>
+        <p class="ft-desc">시고르자브종 썰매견 — 콘텐츠팀 잡부 겸 재롱둥이</p>
+        <p class="ft-copy">© 2026 시고르의 잡종서재</p>
+      </footer>
+    </div>
+  </body>
+</html>

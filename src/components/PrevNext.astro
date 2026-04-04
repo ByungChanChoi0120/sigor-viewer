@@ -1,0 +1,27 @@
+---
+const { prev, next } = Astro.props;
+---
+<nav class="pn-nav">
+  {prev ? (
+    <a class="pn-link pn-prev" href={`/posts/${prev.id}/`}>
+      <span class="pn-dir">← 이전</span>
+      <span class="pn-title">{prev.data.title}</span>
+    </a>
+  ) : <div></div>}
+  {next ? (
+    <a class="pn-link pn-next" href={`/posts/${next.id}/`}>
+      <span class="pn-dir">다음 →</span>
+      <span class="pn-title">{next.data.title}</span>
+    </a>
+  ) : <div></div>}
+</nav>
+
+<style>
+.pn-nav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0 0}
+.pn-link{padding:14px;border:1px solid #e4e4e7;border-radius:12px;background:#fff;display:block}
+.pn-link:hover{background:#fafafa;text-decoration:none}
+.pn-dir{font-size:12px;color:#71717a;display:block}
+.pn-title{font-size:15px;font-weight:600;color:#1a1a2e;display:block;margin-top:2px}
+.pn-next{text-align:right}
+@media(max-width:500px){.pn-nav{grid-template-columns:1fr}}
+</style>

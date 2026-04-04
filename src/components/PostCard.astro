@@ -1,0 +1,26 @@
+---
+import CategoryBadge from './CategoryBadge.astro';
+const { post } = Astro.props;
+---
+<article class="card post-card">
+  <div class="pc-row">
+    <div>
+      <div class="pc-meta">
+        <CategoryBadge category={post.data.category} />
+        <span class="muted">{post.data.date}</span>
+      </div>
+      <h3 class="pc-title"><a href={`/posts/${post.id}/`}>{post.data.title}</a></h3>
+      {post.data.summary && <p class="pc-summary">{post.data.summary}</p>}
+    </div>
+  </div>
+</article>
+
+<style>
+.post-card{transition:background .12s ease}
+.post-card:hover{background:#fafafa}
+.pc-row{display:flex;gap:14px}
+.pc-meta{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.pc-title{margin:0 0 4px;font-size:18px;font-weight:700}
+.pc-title a{color:#1a1a2e}
+.pc-summary{margin:0;color:#71717a;font-size:15px;line-height:1.6}
+</style>

@@ -1,0 +1,15 @@
+---
+const { problem, cause, action, result } = Astro.props;
+---
+<div class="grid">
+  <div class="box"><b>문제</b><br />{problem}</div>
+  <div class="box"><b>원인</b><br />{cause}</div>
+  <div class="box"><b>조치</b><br />{action}</div>
+  <div class="box ok"><b>결과</b><br />{result}</div>
+</div>
+
+<style>
+.grid{display:grid;gap:10px;margin:14px 0}
+.box{padding:12px;border:1px solid var(--border);border-radius:10px;background:#fff}
+.ok{border-color:#bbf7d0;background:#f0fdf4}
+</style>

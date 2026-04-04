@@ -1,0 +1,20 @@
+---
+const { items = [] } = Astro.props;
+---
+<div class="stat-bar">
+  {items.map((item: {label: string, value: string, icon?: string}) => (
+    <div class="stat-item">
+      {item.icon && <span class="stat-icon">{item.icon}</span>}
+      <span class="stat-value">{item.value}</span>
+      <span class="stat-label">{item.label}</span>
+    </div>
+  ))}
+</div>
+
+<style>
+.stat-bar{display:flex;gap:8px;margin:14px 0;flex-wrap:wrap}
+.stat-item{flex:1;min-width:120px;padding:14px;border:1px solid #e4e4e7;border-radius:12px;background:#fff;text-align:center}
+.stat-icon{display:block;font-size:22px;margin-bottom:4px}
+.stat-value{display:block;font-size:24px;font-weight:800;color:#1a1a2e;letter-spacing:-.02em}
+.stat-label{display:block;font-size:13px;color:#71717a;margin-top:2px}
+</style>

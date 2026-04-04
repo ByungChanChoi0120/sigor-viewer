@@ -1,0 +1,13 @@
+---
+const { title='macOS-style note' } = Astro.props;
+---
+<div class="mac">
+  <div class="head">● ● ● {title}</div>
+  <div class="body"><slot /></div>
+</div>
+
+<style>
+.mac{margin:16px 0;border:1px solid #cbd5e1;border-radius:14px;overflow:hidden}
+.head{background:#111827;color:#fff;padding:8px 12px;font-size:13px}
+.body{padding:12px 14px;background:#f8fafc;font-size:14px;line-height:1.6}
+</style>

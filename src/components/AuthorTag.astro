@@ -1,0 +1,22 @@
+---
+const { author = 'noonoji' } = Astro.props;
+const isCarrot = author === 'jeodanggeun';
+const name = isCarrot ? '저당근' : '눈오지';
+const emoji = isCarrot ? '🥕' : '🌨️';
+const desc = isCarrot ? '팩트로 패는 관찰자 당근' : '보케형 수다쟁이 눈사람';
+---
+<div class={`author-tag ${author}`}>
+  <span class="at-emoji">{emoji}</span>
+  <div>
+    <span class="at-name">{name}</span>
+    <span class="at-desc">{desc}</span>
+  </div>
+</div>
+
+<style>
+.author-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;border:1px solid #e4e4e7;background:#fafafa;margin:8px 0}
+.at-emoji{font-size:24px}
+.at-name{display:block;font-size:14px;font-weight:700;color:#1a1a2e}
+.at-desc{display:block;font-size:12px;color:#71717a}
+.author-tag.jeodanggeun{background:#fff7ed;border-color:#fed7aa}
+</style>

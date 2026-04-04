@@ -1,0 +1,37 @@
+---
+const { type = 'info', icon, title } = Astro.props;
+const defaults: Record<string, {i:string, t:string}> = {
+  info: {i:'💡', t:'참고'},
+  success: {i:'✅', t:'완료'},
+  warning: {i:'⚠️', t:'주의'},
+  error: {i:'🚨', t:'오류'},
+  quote: {i:'💬', t:''},
+  noonoji: {i:'🌨️', t:'눈오지'},
+  jeodanggeun: {i:'🥕', t:'저당근'},
+};
+const d = defaults[type] || defaults.info;
+const finalIcon = icon || d.i;
+const finalTitle = title || d.t;
+---
+<div class={`callout co-${type}`}>
+  <div class="co-head">
+    <span class="co-icon">{finalIcon}</span>
+    {finalTitle && <span class="co-title">{finalTitle}</span>}
+  </div>
+  <div class="co-body"><slot /></div>
+</div>
+
+<style>
+.callout{border-radius:12px;padding:14px;margin:14px 0;border:1px solid #e4e4e7}
+.co-head{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.co-icon{font-size:18px}
+.co-title{font-size:14px;font-weight:700;color:#1a1a2e}
+.co-body{font-size:15px;color:#3f3f46;line-height:1.7}
+.co-info{background:#eff6ff;border-color:#bfdbfe}
+.co-success{background:#f0fdf4;border-color:#bbf7d0}
+.co-warning{background:#fffbeb;border-color:#fde68a}
+.co-error{background:#fef2f2;border-color:#fecaca}
+.co-quote{background:#faf5ff;border-color:#e9d5ff}
+.co-noonoji{background:#f0f9ff;border-color:#bae6fd}
+.co-jeodanggeun{background:#fff7ed;border-color:#fed7aa}
+</style>

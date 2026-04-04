@@ -1,0 +1,14 @@
+---
+const { title='TIP', variant='tip' } = Astro.props;
+---
+<div class={`info ${variant}`}>
+  <strong>{title}</strong><br />
+  <slot />
+</div>
+
+<style>
+.info{border:1px solid var(--border);border-radius:12px;padding:12px;margin:12px 0;background:#f9fafb}
+.info.tip{background:#f0fdf4;border-color:#bbf7d0}
+.info.note{background:#eff6ff;border-color:#bfdbfe}
+.info.warning{background:#fffbeb;border-color:#fde68a}
+</style>

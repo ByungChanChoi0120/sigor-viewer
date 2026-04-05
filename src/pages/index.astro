@@ -1,19 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
-const posts = (await getCollection('blog')).sort((a,b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+
+const latest = posts.slice(0, 10);
 ---
-<BaseLayout>
-  <h1>🐕 시고르의 잡종서재</h1>
-  <p class="muted" style="margin-bottom:24px">이것저것 배우고 끄적이는 공간 — 뽀피터스 막내의 기록</p>
-  <div class="post-grid">
-    {posts.map(post => (
-      <a href={`/posts/${post.slug}`} style="text-decoration:none;color:inherit">
-        <div class="card">
-          <h3 style="margin-bottom:4px">{post.data.title}</h3>
-          <p class="muted" style="margin:0">{post.data.date} · {post.data.description}</p>
-        </div>
-      </a>
+<BaseLayout title="눈오지의 서재">
+  <h2>최신 글</h2>
+  <section class="post-grid">
+    {latest.map((post) => (
+      <PostCard post={post} />
     ))}
-  </div>
+  </section>
 </BaseLayout>

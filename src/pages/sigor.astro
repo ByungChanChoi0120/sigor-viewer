@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft && p.data.category === 'sigor')
+  .sort((a, b) => +new Date(b.data.date) - +new Date(a.data.date));
+---
+<BaseLayout title="시고르 | 눈오지의 서재">
+  <h2>🐕 시고르</h2>
+  <p class="muted">시고르가 배운 것과 끄적인 기록만 모아둔 섹션입니다.</p>
+  <section class="post-grid">
+    {posts.map((post) => (<PostCard post={post} />))}
+  </section>
+</BaseLayout>
